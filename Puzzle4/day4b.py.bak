@@ -1,0 +1,74 @@
+with open('day4data.txt') as f:
+    lines = [line.rstrip() for line in f]
+
+buildline = ''
+valid_fields = ['byr','iyr','eyr','hgt','hcl','ecl','pid']
+valid_eyes = ['amb','blu','brn','gry','grn','hzl','oth']
+valid_color = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f']
+passengers = []
+num_fields = len(valid_fields)
+#print num_fields
+valid_passports=0
+num_valid=0
+is_valid=0
+
+for line in lines:
+  if line != '':
+    buildline+=' '+line
+  else:
+    #print buildline
+    is_valid=1
+    linearray=buildline.split(' ')
+    linearray=linearray[1:]
+    for x in linearray:
+      #print x[0:3]
+      if(x[0:3] in valid_fields):
+	num_valid+=1
+      if(x[0:3] == "byr" and len(x[4:]) == 4):
+        if int(x[4:])>2002 or int(x[4:])<1920:
+          #print int(x[4:])
+          is_valid=0
+      if(x[0:3] == "iyr" and len(x[4:]) == 4):
+        if int(x[4:])>2020 or int(x[4:])<2010:
+          #print int(x[4:])
+          is_valid=0
+      if(x[0:3] == "eyr" and len(x[4:]) == 4):
+        if int(x[4:])>2030 or int(x[4:])<2020:
+          is_valid=0
+      if(x[0:3] == "ecl"):
+        if x[4:] not in valid_eyes:
+          #print x[4:]
+          is_valid=0
+      if(x[0:3] == "pid"):
+          if (len(x[4:]) != 9):
+            is_valid=0
+          else:
+            print x[4:]
+      if(x[0:3] == "hgt" and x[-2:] == 'cm'):
+          if int(x[4:-2]) < 150 or int(x[4:-2]) > 193:
+            is_valid = 0 
+      if(x[0:3] == "hgt" and x[-2:] == 'in'):
+          if int(x[4:-2]) < 59 or int(x[4:-2]) > 76:
+            is_valid = 0
+      if(x[0:3] == 'hcl' and len(x[4:]) == 7):
+          #print x[4:]
+          for n in x[5:]:
+            if n not in valid_color:
+              is_valid=0
+
+
+
+    #print linearray
+    if num_valid != num_fields:
+      is_valid = 0
+
+    if is_valid == 1:
+      valid_passports+=1
+    
+    #passengers.append(linearray)
+    is_valid = 0
+    num_valid = 0
+    buildline = ''
+
+#print passengers
+print valid_passports
