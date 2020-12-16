@@ -1,0 +1,61 @@
+def change_seats(current):
+  global counter
+  hcount = 0
+  wcount = 0
+  newseats=[]
+
+  for i in current:
+    newline=""
+    for j in i:
+      occ_count=0
+    
+      for h in range(hcount,len(current)-1):
+        for w in range(wcount,len(i)):
+          #print str(h+hcount)+" "+str(w+wcount)
+          
+            if h==w or h==hcount or w == wcount:
+
+              else current[h][w] == "O":
+                #print str(h+hcount)+" "+str(w+wcount)+" "+current[h+hcount][w+wcount]
+                occ_count +=1
+                #print "will check at"+str(h)+" "+str(w)
+
+      if j == 'L' and occ_count == 0:
+        newline+='O'
+      elif j == 'O' and occ_count >= 5:
+        newline+='L'
+      else:
+        newline+=current[hcount][wcount]
+      wcount+=1
+    hcount+=1
+    wcount = 0
+    newseats.append(newline)
+  hcount=0
+
+
+
+  # print the new array
+  for i in newseats:
+    print i
+
+  #count seats
+  occupancy = 0
+  for i in newseats:
+    occupancy += i.count("O")
+  print occupancy
+
+  counter+=1
+  if counter <= 1:
+    change_seats(newseats)
+
+
+with open('day11data.txt') as f:
+    lines = [line.rstrip() for line in f]
+
+#print len(lines)
+#print len(lines[0])
+
+counter=0
+change_seats(lines)
+
+

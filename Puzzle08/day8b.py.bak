@@ -1,0 +1,71 @@
+def solver(accumulator, location):
+  iterations = 0
+  flip=1
+  while(location<=len(lines)):
+    command = lines[location][:3]
+    amount = int(lines[location][4:])
+
+    #print command
+    #print amount
+    if flip == 1 and command == 'jmp':
+      command = 'nop'
+    if flip == 1 and command == 'nop':
+      command = 'jmp'
+    flip = 0
+    iterations+=1
+
+    if command == 'acc':
+      accumulator+=amount
+      location+=1
+    if command == 'jmp':
+      location+=amount
+    if command == 'nop':
+      location+=1
+
+    if location >= len(lines):
+      #print iterations
+      print accumulator
+      return False
+      break
+    if iterations > 1000:
+      print accumulator
+      return True
+    #print commands_executed
+
+with open('day8data.txt') as f:
+    lines = [line.rstrip() for line in f]
+
+
+accumulator=0
+location=0
+breaker = True
+
+while(breaker):
+  command = lines[location][:3]
+  amount = int(lines[location][4:])
+
+  #print command
+  #print amount
+  
+  if command == 'acc':
+    accumulator+=amount
+    location+=1
+  
+  if command == 'jmp':
+    #if location+1 >= len(lines)-6:
+    #  location+=1
+    #  print changed
+    #else:
+    breaker = solver(accumulator,location)
+    location+=amount
+  
+  if command == 'nop':
+    #if location+amount >= len(lines)-6:
+    #  location+=amount
+    #  print changed
+    #else:
+    breaker = solver(accumulator,location)
+    location+=1
+  #print location
+print accumulator
+

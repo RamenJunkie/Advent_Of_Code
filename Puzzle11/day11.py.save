@@ -1,0 +1,14 @@
+with open('day11data.txt') as f:
+    lines = [line.rstrip() for line in f]
+
+current=[]
+
+
+for i in current:
+  for j in i:
+    if j == 'L':
+      
+
+
+
+#print current
