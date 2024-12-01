@@ -23,8 +23,6 @@ for i in range(len(list1)):
 print(total)
 print(total2)
 
-#totals.sort(reverse=True)
-#print(totals[0]+totals[1]+totals[2])
-# 69177
-#207456
+#1666427
+#24316233
 

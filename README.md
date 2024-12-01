@@ -8,6 +8,7 @@ This repository was originally just my 2020 solutions but has been reorganized t
 
 Order of Completion (Mostly for my reference)
 
-* 2020 Puzzles 1-13
 * 2015 Puzzles 1-09
-* 2022 Puzzles 1-
+* 2020 Puzzles 1-13
+* 2022 Puzzles 1-14
+* 2024 Puzzles 1-
